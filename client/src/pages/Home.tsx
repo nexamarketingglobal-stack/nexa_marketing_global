@@ -1,8 +1,27 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Zap, TrendingUp, Layers, BarChart3, Cpu, Rocket } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { ArrowRight, Zap, TrendingUp, Layers, BarChart3, Cpu, Rocket, Mail, CheckCircle } from "lucide-react";
+import { useState } from "react";
 
 export default function Home() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) return;
+    
+    setLoading(true);
+    setTimeout(() => {
+      setSubscribed(true);
+      setEmail("");
+      setLoading(false);
+      setTimeout(() => setSubscribed(false), 3000);
+    }, 1000);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Navigation Header */}
@@ -465,20 +484,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section with Email Signup */}
       <section className="py-20 bg-gradient-to-r from-primary via-primary/90 to-accent text-white">
-        <div className="container text-center">
-          <h2 className="text-4xl lg:text-5xl font-display font-bold mb-6">Ready to Scale Your Affiliate Business?</h2>
-          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-            Join hundreds of affiliate marketers who are earning $5K-$50K+ per month with Nexa's automation platform.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-              Start Your Free Trial <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-              Schedule a Demo
-            </Button>
+        <div className="container">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl lg:text-5xl font-display font-bold mb-6">Ready to Scale Your Affiliate Business?</h2>
+              <p className="text-xl text-white/80 mb-8">
+                Join hundreds of affiliate marketers who are earning $5K-$50K+ per month with Nexa's automation platform.
+              </p>
+            </div>
+
+            {/* Email Signup Form */}
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Mail className="w-6 h-6 text-accent" />
+                <h3 className="text-2xl font-display font-bold">Get Your Free Automation Blueprint</h3>
+              </div>
+              <p className="text-white/80 mb-6">Discover exactly how to automate your affiliate marketing. Plus, get exclusive tips and strategies delivered to your inbox.</p>
+              
+              {subscribed ? (
+                <div className="flex items-center justify-center gap-3 p-4 bg-accent/20 rounded-lg border border-accent">
+                  <CheckCircle className="w-6 h-6 text-accent" />
+                  <div>
+                    <p className="font-display font-bold text-white">Success!</p>
+                    <p className="text-sm text-white/80">Check your email for your free blueprint and exclusive resources.</p>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="flex-1 bg-white/90 text-foreground placeholder:text-foreground/50 border-0 h-12 rounded-lg"
+                    required
+                  />
+                  <Button
+                    type="submit"
+                    disabled={loading}
+                    className="bg-accent hover:bg-accent/90 text-primary font-bold h-12 px-8 whitespace-nowrap"
+                  >
+                    {loading ? "Subscribing..." : "Get Blueprint"}
+                  </Button>
+                </form>
+              )}
+              <p className="text-xs text-white/60 mt-4">✓ No spam. Unsubscribe anytime. We respect your privacy.</p>
+            </div>
+
+            {/* Alternative CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="bg-white text-primary hover:bg-white/90">
+                Start Your Free Trial <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                Schedule a Demo
+              </Button>
+            </div>
           </div>
         </div>
       </section>
