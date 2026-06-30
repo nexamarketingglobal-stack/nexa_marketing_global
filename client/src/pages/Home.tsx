@@ -233,6 +233,71 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-20 bg-background">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-display font-bold mb-4">What Our Clients Say</h2>
+            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+              Real affiliate marketers sharing their success stories with Nexa.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                name: "Michael Chen",
+                role: "Tech Affiliate Marketer",
+                image: "/manus-storage/testimonial-client-1_4ccff944.png",
+                quote: "Nexa cut my content creation time by 80%. I went from 3 posts per week to 21. My earnings tripled in just 3 months.",
+                rating: 5
+              },
+              {
+                name: "Sarah Mitchell",
+                role: "Digital Marketing Manager",
+                image: "/manus-storage/testimonial-client-2_bcd53656.png",
+                quote: "The competitor analysis feature alone is worth the subscription. I discovered winning strategies I never would have found manually.",
+                rating: 5
+              },
+              {
+                name: "David Rodriguez",
+                role: "Affiliate Marketing Expert",
+                image: "/manus-storage/testimonial-client-3_6c22f096.png",
+                quote: "From $500 to $8,500 per month in 6 months. Nexa's automation is a game-changer for scaling affiliate income.",
+                rating: 5
+              },
+              {
+                name: "Jessica Lee",
+                role: "Content Creator & Marketer",
+                image: "/manus-storage/testimonial-client-4_c82d3ae1.png",
+                quote: "Finally, a platform that understands affiliate marketing. The AI content is on-brand, and the multi-platform publishing is seamless.",
+                rating: 5
+              }
+            ].map((testimonial, i) => (
+              <Card key={i} className="p-6 hover:shadow-lg transition-all duration-300 border-border flex flex-col">
+                <div className="flex items-center gap-4 mb-4">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name}
+                    className="w-14 h-14 rounded-full object-cover border-2 border-accent"
+                  />
+                  <div>
+                    <h3 className="font-display font-bold text-foreground">{testimonial.name}</h3>
+                    <p className="text-sm text-foreground/60">{testimonial.role}</p>
+                  </div>
+                </div>
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, j) => (
+                    <span key={j} className="text-accent text-lg">★</span>
+                  ))}
+                </div>
+                <p className="text-foreground/70 italic flex-grow">"{testimonial.quote}"</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Results Section */}
       <section className="py-20 bg-gradient-to-r from-primary to-primary/80 text-white">
         <div className="container">
