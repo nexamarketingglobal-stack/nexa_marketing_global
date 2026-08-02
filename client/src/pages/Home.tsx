@@ -9,9 +9,21 @@ export default function Home() {
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Improved email validation function
+  const isValidEmail = (emailStr: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const trimmed = emailStr.trim();
+    return emailRegex.test(trimmed) && trimmed.length <= 254 && trimmed.length > 0;
+  };
+
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !email.includes("@")) return;
+    
+    // Sanitize and validate email
+    const trimmedEmail = email.trim().toLowerCase();
+    if (!isValidEmail(trimmedEmail)) {
+      return;
+    }
     
     setLoading(true);
     setTimeout(() => {
