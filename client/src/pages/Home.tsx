@@ -41,7 +41,7 @@ export default function Home() {
         <div className="container flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
             <img 
-              src="/manus-storage/logo-icon_30db279d.png" 
+              src="/manus-storage/logo-icon-dark_472b735c.png" 
               alt="Nexa Logo" 
               className="w-8 h-8"
             />
@@ -61,10 +61,10 @@ export default function Home() {
         <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: "url('/manus-storage/hero-background_2b10dc8c.png')",
+            backgroundImage: "url('/manus-storage/hero-background-dark_9e714d0d.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: 0.15
+            opacity: 0.2
           }}
         />
         <div className="container relative z-10">
@@ -101,7 +101,7 @@ export default function Home() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-3xl" />
               <img 
-                src="/manus-storage/dashboard-mockup_1ca31d99.png" 
+                src="/manus-storage/dashboard-mockup-dark_fcc7f897.png" 
                 alt="Analytics Dashboard"
                 className="relative rounded-2xl shadow-2xl border border-border"
               />
@@ -201,7 +201,7 @@ export default function Home() {
 
           <div className="bg-white rounded-2xl border border-border overflow-hidden">
             <img 
-              src="/manus-storage/workflow-diagram_d2477c25.png" 
+              src="/manus-storage/workflow-diagram-dark_a65c58e0.png" 
               alt="Automation Workflow"
               className="w-full h-auto"
             />
