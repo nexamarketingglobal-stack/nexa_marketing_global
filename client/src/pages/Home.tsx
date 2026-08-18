@@ -4,6 +4,7 @@
  */
 import { useEffect, useState } from "react";
 import { ArrowDownRight, ArrowUpRight, Check, Globe2, Menu, X } from "lucide-react";
+import ProductExplorer from "@/components/ProductExplorer";
 import { languageOptions, type LanguageCode } from "@/lib/i18n";
 import { storeCopy } from "@/lib/store";
 
@@ -85,7 +86,7 @@ export default function Home() {
               <div className="mb-6 flex items-center gap-3 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#C9141B]"><span className="h-px w-9 bg-[#C9141B]" />{content.hero.eyebrow}</div>
               <h1 className="text-[clamp(3.2rem,6.8vw,6.3rem)] font-extrabold leading-[0.9] tracking-[-0.08em]">{content.hero.title}<br /><span className="text-[#C9141B]">{content.hero.accent}</span></h1>
               <p className="mt-7 max-w-xl text-[17px] font-medium leading-8 text-[#66676B] sm:text-[19px]">{content.hero.body}</p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row"><a href="#phones" className="inline-flex h-13 items-center justify-center gap-3 bg-[#C9141B] px-6 text-sm font-extrabold text-white transition-colors hover:bg-[#A90E15]">{content.hero.primary}<ArrowDownRight className="h-4 w-4" /></a><a href="#selection" className="inline-flex h-13 items-center justify-center gap-3 border border-[#0A0A0A] px-6 text-sm font-extrabold transition-colors hover:bg-[#0A0A0A] hover:text-white">{content.hero.secondary}</a></div>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row"><a href="#product-finder" className="inline-flex h-13 items-center justify-center gap-3 bg-[#C9141B] px-6 text-sm font-extrabold text-white transition-colors hover:bg-[#A90E15]">{content.hero.primary}<ArrowDownRight className="h-4 w-4" /></a><a href="#selection" className="inline-flex h-13 items-center justify-center gap-3 border border-[#0A0A0A] px-6 text-sm font-extrabold transition-colors hover:bg-[#0A0A0A] hover:text-white">{content.hero.secondary}</a></div>
               <p className="mt-7 border-s-2 border-[#C9141B] ps-4 text-sm font-semibold leading-6 text-[#66676B]">{content.hero.note}</p>
             </div>
             <div className="relative mx-auto w-full max-w-[760px]">
@@ -105,6 +106,8 @@ export default function Home() {
             {content.categories.items.map((item) => <a key={item.title} href="#accessories" className="group min-h-[235px] border-b border-e border-[#DDD9D2] bg-[#F7F5F2] p-5 transition-colors hover:bg-[#0A0A0A] hover:text-white sm:p-6"><span className="text-sm font-extrabold text-[#C9141B]">{item.number}</span><div className="my-10 h-px bg-[#DDD9D2] group-hover:bg-white/20" /><h3 className="text-[18px] font-extrabold tracking-[-0.04em]">{item.title}</h3><p className="mt-3 text-sm font-medium leading-6 text-[#66676B] group-hover:text-white/65">{item.description}</p><ArrowUpRight className="mt-5 h-4 w-4 text-[#C9141B]" /></a>)}
           </div>
         </section>
+
+        <ProductExplorer language={language} />
 
         <section id="accessories" className="border-y border-[#DDD9D2] bg-[#0A0A0A] text-white">
           <div className="container grid gap-12 py-16 sm:py-20 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-16">
