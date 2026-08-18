@@ -41,7 +41,7 @@ export default function Home() {
         <div className="container flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
             <img 
-              src="/manus-storage/logo-icon-dark_472b735c.png" 
+              src="/manus-storage/logo-icon-dark_7819b04d.png" 
               alt="Nexa Logo" 
               className="w-8 h-8"
             />
@@ -61,7 +61,7 @@ export default function Home() {
         <div 
           className="absolute inset-0 z-0"
           style={{
-            backgroundImage: "url('/manus-storage/hero-background-dark_9e714d0d.png')",
+            backgroundImage: "url('/manus-storage/hero-background-dark_89eb92d7.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: 0.2
@@ -101,7 +101,7 @@ export default function Home() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-3xl" />
               <img 
-                src="/manus-storage/dashboard-mockup-dark_fcc7f897.png" 
+                src="/manus-storage/dashboard-mockup-dark_d76ea782.png" 
                 alt="Analytics Dashboard"
                 className="relative rounded-2xl shadow-2xl border border-border"
               />
@@ -201,7 +201,7 @@ export default function Home() {
 
           <div className="bg-white rounded-2xl border border-border overflow-hidden">
             <img 
-              src="/manus-storage/workflow-diagram-dark_a65c58e0.png" 
+              src="/manus-storage/workflow-diagram-dark_c8fdd054.png" 
               alt="Automation Workflow"
               className="w-full h-auto"
             />
@@ -279,28 +279,28 @@ export default function Home() {
               {
                 name: "Michael Chen",
                 role: "Tech Affiliate Marketer",
-                image: "/manus-storage/testimonial-client-1_4ccff944.png",
+                image: "/manus-storage/testimonial-client-1_7e3a0130.png",
                 quote: "Nexa cut my content creation time by 80%. I went from 3 posts per week to 21. My earnings tripled in just 3 months.",
                 rating: 5
               },
               {
                 name: "Sarah Mitchell",
                 role: "Digital Marketing Manager",
-                image: "/manus-storage/testimonial-client-2_bcd53656.png",
+                image: "/manus-storage/testimonial-client-2_3f4092d0.png",
                 quote: "The competitor analysis feature alone is worth the subscription. I discovered winning strategies I never would have found manually.",
                 rating: 5
               },
               {
                 name: "David Rodriguez",
                 role: "Affiliate Marketing Expert",
-                image: "/manus-storage/testimonial-client-3_6c22f096.png",
+                image: "/manus-storage/testimonial-client-3_7fbad56b.png",
                 quote: "From $500 to $8,500 per month in 6 months. Nexa's automation is a game-changer for scaling affiliate income.",
                 rating: 5
               },
               {
                 name: "Jessica Lee",
                 role: "Content Creator & Marketer",
-                image: "/manus-storage/testimonial-client-4_c82d3ae1.png",
+                image: "/manus-storage/testimonial-client-4_56403ac4.png",
                 quote: "Finally, a platform that understands affiliate marketing. The AI content is on-brand, and the multi-platform publishing is seamless.",
                 rating: 5
               }
@@ -527,10 +527,14 @@ export default function Home() {
                 <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
                   <Input
                     type="email"
+                    name="email"
                     placeholder="Enter your email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="flex-1 bg-white/90 text-foreground placeholder:text-foreground/50 border-0 h-12 rounded-lg"
+                    autoComplete="email"
+                    inputMode="email"
+                    maxLength={254}
+                    className="manus-no-record flex-1 bg-white/90 text-foreground placeholder:text-foreground/50 border-0 h-12 rounded-lg"
                     required
                   />
                   <Button
@@ -565,7 +569,7 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <img 
-                  src="/manus-storage/logo-icon_30db279d.png" 
+                  src="/manus-storage/logo-icon-dark_7819b04d.png" 
                   alt="Nexa Logo" 
                   className="w-6 h-6"
                 />

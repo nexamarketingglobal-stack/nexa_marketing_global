@@ -10,6 +10,30 @@ async function startServer() {
   const app = express();
   const server = createServer(app);
 
+  // Security baseline for any Node-hosted deployment of this static site.
+  app.disable("x-powered-by");
+  app.use((_req, res, next) => {
+    res.setHeader("Content-Security-Policy", [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "frame-ancestors 'none'",
+      "object-src 'none'",
+      "script-src 'self' https://manus-analytics.com https://files.manuscdn.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' https://fonts.gstatic.com",
+      "img-src 'self' data: blob: https://files.manuscdn.com https://*.cloudfront.net",
+      "connect-src 'self' https://api.manus.im https://manus-analytics.com",
+      "upgrade-insecure-requests",
+    ].join("; "));
+    res.setHeader("Permissions-Policy", "camera=(), geolocation=(), microphone=(), payment=(), usb=()");
+    res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.setHeader("X-Frame-Options", "DENY");
+    res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+    next();
+  });
+
   // Serve static files from dist/public in production
   const staticPath =
     process.env.NODE_ENV === "production"
@@ -19,7 +43,7 @@ async function startServer() {
   app.use(express.static(staticPath));
 
   // Handle client-side routing - serve index.html for all routes
-  app.get("*", (_req, res) => {
+  app.get("/{*splat}", (_req, res) => {
     res.sendFile(path.join(staticPath, "index.html"));
   });
 
