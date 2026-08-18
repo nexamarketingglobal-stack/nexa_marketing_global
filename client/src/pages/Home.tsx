@@ -1,613 +1,243 @@
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { ArrowRight, Zap, TrendingUp, Layers, BarChart3, Cpu, Rocket, Mail, CheckCircle } from "lucide-react";
-import { useState } from "react";
+/**
+ * Global Editorial Enterprise: quiet ink, crimson signal, editorial spacing,
+ * and an RTL-aware international interface built around the Nexa brand seal.
+ */
+import { useEffect, useState } from "react";
+import {
+  ArrowDownRight,
+  ArrowUpRight,
+  Check,
+  Globe2,
+  Menu,
+  Sparkles,
+  X,
+} from "lucide-react";
+import { copy, languageOptions, metaLabels, type LanguageCode } from "@/lib/i18n";
+
+const logoUrl = "/manus-storage/nexa-marketing-global-logo_35910d71.png";
+const dashboardUrl = "/manus-storage/dashboard-mockup-dark_d76ea782.png";
+const heroTextureUrl = "/manus-storage/hero-background-dark_89eb92d7.png";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [language, setLanguage] = useState<LanguageCode>(() => {
+    const requested = new URLSearchParams(window.location.search).get("lang") as LanguageCode | null;
+    const saved = window.localStorage.getItem("nexa-language") as LanguageCode | null;
+    if (languageOptions.some((option) => option.code === requested)) return requested!;
+    return languageOptions.some((option) => option.code === saved) ? saved! : "en";
+  });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Improved email validation function
-  const isValidEmail = (emailStr: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const trimmed = emailStr.trim();
-    return emailRegex.test(trimmed) && trimmed.length <= 254 && trimmed.length > 0;
+  const languageOption = languageOptions.find((option) => option.code === language) ?? languageOptions[0];
+  const content = copy[language];
+  const meta = metaLabels[language];
+  const isRtl = languageOption.dir === "rtl";
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dir = languageOption.dir;
+    window.localStorage.setItem("nexa-language", language);
+  }, [language, languageOption.dir]);
+
+  const changeLanguage = (value: string) => {
+    setLanguage(value as LanguageCode);
+    setMobileMenuOpen(false);
   };
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Sanitize and validate email
-    const trimmedEmail = email.trim().toLowerCase();
-    if (!isValidEmail(trimmedEmail)) {
-      return;
-    }
-    
-    setLoading(true);
-    setTimeout(() => {
-      setSubscribed(true);
-      setEmail("");
-      setLoading(false);
-      setTimeout(() => setSubscribed(false), 3000);
-    }, 1000);
-  };
+  const fontFamily = isRtl
+    ? "'Noto Sans Arabic', Manrope, sans-serif"
+    : language === "ja"
+      ? "'Noto Sans JP', Manrope, sans-serif"
+      : language === "zh"
+        ? "'Noto Sans SC', Manrope, sans-serif"
+        : "Manrope, sans-serif";
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Navigation Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-border">
-        <div className="container flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
-            <img 
-              src="/manus-storage/logo-icon-dark_7819b04d.png" 
-              alt="Nexa Logo" 
-              className="w-8 h-8"
-            />
-            <span className="text-xl font-display font-bold text-primary">Nexa</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-sm font-medium hover:text-primary transition-colors">Features</a>
-            <a href="#workflows" className="text-sm font-medium hover:text-primary transition-colors">Workflows</a>
-            <a href="#pricing" className="text-sm font-medium hover:text-primary transition-colors">Pricing</a>
+    <div
+      className="min-h-screen bg-[#F7F5F2] text-[#0A0A0A] selection:bg-[#C9141B] selection:text-white"
+      style={{ fontFamily }}
+    >
+      <header className="sticky top-0 z-50 border-b border-[#DDD9D2] bg-[#F7F5F2]/95 backdrop-blur-xl">
+        <div className="container flex h-[76px] items-center justify-between gap-6">
+          <a href="#top" className="group flex items-center gap-3" aria-label="Nexa Marketing Global home">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#0A0A0A]/15 bg-white">
+              <img src={logoUrl} alt="Nexa Marketing Global" className="h-full w-full object-contain" />
+            </span>
+            <span className="min-w-0 leading-none">
+              <span className="block text-[15px] font-extrabold tracking-[-0.05em] text-[#0A0A0A]">NEXA</span>
+              <span className="mt-1 block text-[9px] font-bold tracking-[0.18em] text-[#C9141B]">MARKETING GLOBAL</span>
+            </span>
+          </a>
+
+          <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
+            <a href="#platform" className="text-[13px] font-bold text-[#333] transition-colors hover:text-[#C9141B]">{content.nav.platform}</a>
+            <a href="#workflow" className="text-[13px] font-bold text-[#333] transition-colors hover:text-[#C9141B]">{content.nav.workflow}</a>
+            <a href="#insights" className="text-[13px] font-bold text-[#333] transition-colors hover:text-[#C9141B]">{content.nav.insights}</a>
+            <a href="#contact" className="text-[13px] font-bold text-[#333] transition-colors hover:text-[#C9141B]">{content.nav.contact}</a>
           </nav>
-          <Button className="bg-primary hover:bg-primary/90">Get Started</Button>
+
+          <div className="hidden items-center gap-3 sm:flex">
+            <label className="relative flex h-10 items-center gap-2 border border-[#DDD9D2] bg-white px-3 text-xs font-bold text-[#333]">
+              <Globe2 className="h-4 w-4 text-[#C9141B]" aria-hidden="true" />
+              <span className="sr-only">{content.nav.language}</span>
+              <select
+                value={language}
+                onChange={(event) => changeLanguage(event.target.value)}
+                aria-label={content.nav.language}
+                className="appearance-none bg-transparent pe-5 outline-none"
+              >
+                {languageOptions.map((option) => <option key={option.code} value={option.code}>{option.nativeLabel}</option>)}
+              </select>
+              <span className="pointer-events-none absolute end-3 top-1/2 -translate-y-1/2 text-[10px]">⌄</span>
+            </label>
+            <a href="#contact" className="inline-flex h-10 items-center gap-2 bg-[#0A0A0A] px-4 text-xs font-extrabold text-white transition-colors hover:bg-[#C9141B]">
+              {content.nav.contact}<ArrowUpRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
+
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center border border-[#DDD9D2] bg-white lg:hidden"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
+
+        {mobileMenuOpen && (
+          <div className="border-t border-[#DDD9D2] bg-[#F7F5F2] px-4 py-5 lg:hidden">
+            <nav className="mx-auto flex max-w-[1280px] flex-col gap-4" aria-label="Mobile navigation">
+              {[{ href: "#platform", label: content.nav.platform }, { href: "#workflow", label: content.nav.workflow }, { href: "#insights", label: content.nav.insights }, { href: "#contact", label: content.nav.contact }].map((item) => (
+                <a key={item.href} href={item.href} onClick={() => setMobileMenuOpen(false)} className="border-b border-[#DDD9D2] pb-3 text-sm font-extrabold">{item.label}</a>
+              ))}
+              <label className="mt-1 flex items-center gap-2 text-sm font-bold">
+                <Globe2 className="h-4 w-4 text-[#C9141B]" />
+                <span>{content.nav.language}</span>
+                <select value={language} onChange={(event) => changeLanguage(event.target.value)} className="ms-auto bg-transparent text-sm outline-none">
+                  {languageOptions.map((option) => <option key={option.code} value={option.code}>{option.nativeLabel}</option>)}
+                </select>
+              </label>
+            </nav>
+          </div>
+        )}
       </header>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pt-20 pb-32">
-        <div 
-          className="absolute inset-0 z-0"
-          style={{
-            backgroundImage: "url('/manus-storage/hero-background-dark_89eb92d7.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            opacity: 0.2
-          }}
-        />
-        <div className="container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <div className="inline-block px-4 py-2 bg-accent/10 rounded-full border border-accent/20">
-                <span className="text-sm font-medium text-accent">Automate Your Affiliate Empire</span>
-              </div>
-              <h1 className="text-5xl lg:text-6xl font-display font-bold leading-tight">
-                Turn Social Posts Into <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Passive Income</span>
-              </h1>
-              <p className="text-xl text-foreground/70 leading-relaxed max-w-lg">
-                Nexa automates your entire affiliate marketing workflow. Create content with AI, publish across 5 platforms, analyze competitors, and track earnings—all from one intelligent platform.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white">
-                  See Your Automation Blueprint <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-                <Button size="lg" variant="outline">
-                  Watch Demo
-                </Button>
-              </div>
-              <div className="flex items-center gap-6 pt-8 text-sm text-foreground/60">
-                <div className="flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-accent" />
-                  <span>5 Platforms Automated</span>
+      <main id="top">
+        <section className="relative overflow-hidden border-b border-[#DDD9D2]" id="platform">
+          <div className="absolute inset-0 opacity-[0.045]" style={{ backgroundImage: `url('${heroTextureUrl}')`, backgroundPosition: "center", backgroundSize: "cover" }} />
+          <div className="container relative py-14 sm:py-20 lg:py-24">
+            <div className="grid items-end gap-12 lg:grid-cols-[minmax(0,0.96fr)_minmax(440px,0.9fr)] lg:gap-16">
+              <div className="max-w-3xl">
+                <div className="mb-7 flex items-center gap-3 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#C9141B]">
+                  <span className="h-px w-9 bg-[#C9141B]" />
+                  {content.hero.eyebrow}
                 </div>
-                <div className="flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-accent" />
-                  <span>3-5x Earnings Growth</span>
+                <h1 className="max-w-3xl text-[clamp(2.8rem,6.4vw,6.1rem)] font-extrabold leading-[0.93] tracking-[-0.075em] text-[#0A0A0A]">
+                  {content.hero.title}<br />
+                  <span className="text-[#C9141B]">{content.hero.highlight}</span>
+                </h1>
+                <p className="mt-8 max-w-xl text-[17px] font-medium leading-8 text-[#5D5D62] sm:text-[19px]">{content.hero.body}</p>
+                <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                  <a href="#workflow" className="inline-flex h-13 items-center justify-center gap-3 bg-[#C9141B] px-6 text-sm font-extrabold text-white transition-colors hover:bg-[#A90E15]">
+                    {content.hero.primary}<ArrowDownRight className="h-4 w-4" />
+                  </a>
+                  <a href="#insights" className="inline-flex h-13 items-center justify-center gap-3 border border-[#0A0A0A] px-6 text-sm font-extrabold text-[#0A0A0A] transition-colors hover:bg-[#0A0A0A] hover:text-white">
+                    {content.hero.secondary}
+                  </a>
+                </div>
+                <p className="mt-7 max-w-lg border-s-2 border-[#C9141B] ps-4 text-sm font-semibold leading-6 text-[#5D5D62]">{content.hero.note}</p>
+              </div>
+
+              <div className="relative mx-auto w-full max-w-[620px] lg:mx-0">
+                <div className="absolute -end-5 -top-5 z-10 flex h-20 w-20 items-center justify-center rounded-full border border-[#C9141B]/30 bg-[#F7F5F2] text-center text-[10px] font-extrabold leading-4 tracking-[0.08em] text-[#C9141B] sm:-end-8 sm:-top-8 sm:h-24 sm:w-24">NEXA<br />GLOBAL<br />SYSTEM</div>
+                <div className="border border-[#0A0A0A] bg-[#0A0A0A] p-2 shadow-[16px_16px_0_#C9141B] sm:p-3">
+                  <img src={dashboardUrl} alt="Nexa affiliate operations dashboard" className="aspect-[16/10] w-full object-contain" />
+                </div>
+                <div className="mt-6 grid grid-cols-3 border-y border-[#DDD9D2] bg-[#F7F5F2]">
+                  <div className="border-e border-[#DDD9D2] py-4 text-center"><span className="block text-lg font-extrabold tracking-[-0.05em]">4</span><span className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#5D5D62]">{content.system.steps.length} {meta.stages}</span></div>
+                  <div className="border-e border-[#DDD9D2] py-4 text-center"><span className="block text-lg font-extrabold tracking-[-0.05em]">8</span><span className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#5D5D62]">{languageOptions.length} {meta.languages}</span></div>
+                  <div className="py-4 text-center"><span className="block text-lg font-extrabold tracking-[-0.05em]">1</span><span className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#5D5D62]">{meta.system}</span></div>
                 </div>
               </div>
             </div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-3xl" />
-              <img 
-                src="/manus-storage/dashboard-mockup-dark_d76ea782.png" 
-                alt="Analytics Dashboard"
-                className="relative rounded-2xl shadow-2xl border border-border"
-              />
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Problem/Solution Section */}
-      <section className="py-20 bg-white">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl font-display font-bold">Stop Wasting Time on Manual Tasks</h2>
-              <p className="text-lg text-foreground/70">
-                Most affiliate marketers spend 20+ hours per week on repetitive tasks: creating content, scheduling posts, analyzing competitors, and tracking metrics. That's time you could be earning.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "Manually creating content for 5 platforms daily",
-                  "No data-driven strategy for product selection",
-                  "Missing competitor insights and trends",
-                  "Inconsistent posting schedules killing engagement",
-                  "No real-time performance tracking"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-destructive/10 flex items-center justify-center flex-shrink-0 mt-1">
-                      <span className="text-xs font-bold text-destructive">✕</span>
-                    </div>
-                    <span className="text-foreground/70">{item}</span>
-                  </li>
-                ))}
-              </ul>
+        <section className="container py-16 sm:py-20" id="workflow">
+          <div className="grid gap-10 border-b border-[#DDD9D2] pb-12 lg:grid-cols-[0.64fr_1.36fr] lg:gap-20">
+            <div>
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#C9141B]">{content.system.eyebrow}</p>
+              <h2 className="mt-5 text-[clamp(2rem,3.8vw,3.5rem)] font-extrabold leading-[1.02] tracking-[-0.055em]">{content.system.title}</h2>
             </div>
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl blur-3xl" />
-              <div className="relative bg-gradient-to-br from-primary/5 to-accent/5 rounded-2xl p-8 border border-border">
-                <h3 className="text-2xl font-display font-bold mb-6">Nexa Solves This</h3>
-                <ul className="space-y-4">
-                  {[
-                    "AI-powered content creation for all platforms",
-                    "Automated competitor analysis & insights",
-                    "Smart product recommendations based on sales data",
-                    "Consistent daily posting on optimal schedules",
-                    "Real-time earnings tracking & ROI metrics"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
-                        <span className="text-xs font-bold text-accent">✓</span>
-                      </div>
-                      <span className="text-foreground">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Workflow Section */}
-      <section id="workflows" className="py-20 bg-gradient-to-b from-background to-primary/5">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4">Your Automation Workflow</h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Five intelligent steps that work together to build your affiliate empire automatically.
-            </p>
+            <p className="max-w-2xl self-end text-[17px] font-medium leading-8 text-[#5D5D62]">{content.system.body}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
-            {[
-              { icon: Cpu, title: "AI Content Creation", desc: "Generate posts, images & videos daily" },
-              { icon: Rocket, title: "Multi-Platform Publishing", desc: "Auto-post to FB, IG, X, TikTok, Pinterest" },
-              { icon: BarChart3, title: "Competitor Analysis", desc: "Track top performers & extract insights" },
-              { icon: Layers, title: "Product Intelligence", desc: "Find best-selling products automatically" },
-              { icon: TrendingUp, title: "Performance Tracking", desc: "Real-time earnings & engagement metrics" }
-            ].map((step, i) => (
-              <div key={i} className="relative">
-                {i < 4 && (
-                  <div className="hidden lg:block absolute top-1/3 -right-2 w-4 h-4 text-accent">
-                    <ArrowRight className="w-full h-full" />
-                  </div>
-                )}
-                <Card className="h-full p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border-border">
-                  <div className="flex flex-col items-center text-center space-y-3">
-                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center">
-                      <step.icon className="w-6 h-6 text-accent" />
-                    </div>
-                    <h3 className="font-display font-bold text-lg">{step.title}</h3>
-                    <p className="text-sm text-foreground/60">{step.desc}</p>
-                  </div>
-                </Card>
-              </div>
+          <div className="grid border-s border-t border-[#DDD9D2] sm:grid-cols-2 lg:grid-cols-4">
+            {content.system.steps.map((step) => (
+              <article key={step.number} className="min-h-[260px] border-b border-e border-[#DDD9D2] bg-[#F7F5F2] p-6 sm:p-7">
+                <span className="text-sm font-extrabold tracking-[-0.04em] text-[#C9141B]">{step.number}</span>
+                <div className="my-12 h-px w-full bg-[#DDD9D2]" />
+                <h3 className="text-xl font-extrabold tracking-[-0.04em]">{step.title}</h3>
+                <p className="mt-4 text-sm font-medium leading-6 text-[#5D5D62]">{step.body}</p>
+              </article>
             ))}
           </div>
+        </section>
 
-          <div className="bg-white rounded-2xl border border-border overflow-hidden">
-            <img 
-              src="/manus-storage/workflow-diagram-dark_c8fdd054.png" 
-              alt="Automation Workflow"
-              className="w-full h-auto"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="features" className="py-20 bg-white">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4">Powerful Features Built for Scale</h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Everything you need to build a six-figure affiliate business, all in one platform.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "AI Content Generation",
-                desc: "Create unlimited posts, images, and short videos using advanced AI models. Customize tone, style, and messaging for each platform.",
-                icon: Cpu
-              },
-              {
-                title: "Multi-Platform Automation",
-                desc: "Publish simultaneously to Facebook, Instagram, X, TikTok, and Pinterest with platform-specific optimizations.",
-                icon: Rocket
-              },
-              {
-                title: "Competitor Intelligence",
-                desc: "Automatically analyze top competitors, track their content strategy, and identify winning patterns.",
-                icon: BarChart3
-              },
-              {
-                title: "Product Recommendations",
-                desc: "Get AI-powered suggestions for high-converting products based on sales data and market trends.",
-                icon: Layers
-              },
-              {
-                title: "Performance Analytics",
-                desc: "Track engagement, clicks, conversions, and earnings in real-time with detailed ROI breakdowns.",
-                icon: TrendingUp
-              },
-              {
-                title: "SEO Optimization",
-                desc: "Automatic keyword research and content optimization to boost organic visibility across platforms.",
-                icon: Zap
-              }
-            ].map((feature, i) => (
-              <Card key={i} className="p-8 hover:shadow-lg transition-all duration-300 border-border">
-                <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                  <feature.icon className="w-6 h-6 text-accent" />
-                </div>
-                <h3 className="text-xl font-display font-bold mb-3">{feature.title}</h3>
-                <p className="text-foreground/70">{feature.desc}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-background">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4">What Our Clients Say</h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Real affiliate marketers sharing their success stories with Nexa.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                name: "Michael Chen",
-                role: "Tech Affiliate Marketer",
-                image: "/manus-storage/testimonial-client-1_7e3a0130.png",
-                quote: "Nexa cut my content creation time by 80%. I went from 3 posts per week to 21. My earnings tripled in just 3 months.",
-                rating: 5
-              },
-              {
-                name: "Sarah Mitchell",
-                role: "Digital Marketing Manager",
-                image: "/manus-storage/testimonial-client-2_3f4092d0.png",
-                quote: "The competitor analysis feature alone is worth the subscription. I discovered winning strategies I never would have found manually.",
-                rating: 5
-              },
-              {
-                name: "David Rodriguez",
-                role: "Affiliate Marketing Expert",
-                image: "/manus-storage/testimonial-client-3_7fbad56b.png",
-                quote: "From $500 to $8,500 per month in 6 months. Nexa's automation is a game-changer for scaling affiliate income.",
-                rating: 5
-              },
-              {
-                name: "Jessica Lee",
-                role: "Content Creator & Marketer",
-                image: "/manus-storage/testimonial-client-4_56403ac4.png",
-                quote: "Finally, a platform that understands affiliate marketing. The AI content is on-brand, and the multi-platform publishing is seamless.",
-                rating: 5
-              }
-            ].map((testimonial, i) => (
-              <Card key={i} className="p-6 hover:shadow-lg transition-all duration-300 border-border flex flex-col">
-                <div className="flex items-center gap-4 mb-4">
-                  <img 
-                    src={testimonial.image} 
-                    alt={testimonial.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-accent"
-                  />
+        <section className="border-y border-[#DDD9D2] bg-white" id="insights">
+          <div className="container grid gap-12 py-16 sm:py-20 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+            <div>
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#C9141B]">{content.scope.eyebrow}</p>
+              <h2 className="mt-5 text-[clamp(2rem,3.8vw,3.5rem)] font-extrabold leading-[1.02] tracking-[-0.055em]">{content.scope.title}</h2>
+              <p className="mt-6 max-w-md text-[17px] font-medium leading-8 text-[#5D5D62]">{content.scope.body}</p>
+            </div>
+            <div className="grid content-start border-s border-t border-[#DDD9D2] sm:grid-cols-2">
+              {content.scope.items.map((item, index) => (
+                <div key={item} className="flex min-h-32 items-start gap-4 border-b border-e border-[#DDD9D2] p-6">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#C9141B] text-white"><Check className="h-3.5 w-3.5" /></span>
                   <div>
-                    <h3 className="font-display font-bold text-foreground">{testimonial.name}</h3>
-                    <p className="text-sm text-foreground/60">{testimonial.role}</p>
+                    <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#C9141B]">0{index + 1}</p>
+                    <p className="mt-2 text-base font-extrabold tracking-[-0.035em]">{item}</p>
                   </div>
                 </div>
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, j) => (
-                    <span key={j} className="text-accent text-lg">★</span>
-                  ))}
-                </div>
-                <p className="text-foreground/70 italic flex-grow">"{testimonial.quote}"</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Results Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-primary/80 text-white">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4">Proven Results</h2>
-            <p className="text-lg text-white/80 max-w-2xl mx-auto">
-              Affiliate marketers using Nexa see consistent growth in earnings and engagement.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { metric: "3-5x", label: "Earnings Growth", desc: "Average increase in monthly affiliate revenue" },
-              { metric: "87%", label: "Time Saved", desc: "Hours freed up from manual content creation" },
-              { metric: "$10K+", label: "Monthly Potential", desc: "Average earnings after 6 months" }
-            ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-5xl font-display font-bold mb-2">{stat.metric}</div>
-                <div className="text-xl font-semibold mb-2">{stat.label}</div>
-                <p className="text-white/70">{stat.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section */}
-      <section className="py-20 bg-background">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4">How It Works</h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Get started in minutes. No technical skills required.
-            </p>
-          </div>
-
-          <div className="space-y-12">
-            {[
-              {
-                step: "01",
-                title: "Connect Your Accounts",
-                desc: "Link your social media accounts and affiliate networks. Nexa securely integrates with all major platforms.",
-                icon: Layers
-              },
-              {
-                step: "02",
-                title: "Set Your Preferences",
-                desc: "Choose your niche, target audience, posting frequency, and content style. Customize everything to match your brand.",
-                icon: Cpu
-              },
-              {
-                step: "03",
-                title: "Let AI Work",
-                desc: "Our automation engine creates, analyzes, and publishes content 24/7. Monitor everything from your dashboard.",
-                icon: Rocket
-              },
-              {
-                step: "04",
-                title: "Track & Optimize",
-                desc: "Watch your earnings grow with real-time analytics. Nexa automatically optimizes based on performance data.",
-                icon: TrendingUp
-              }
-            ].map((item, i) => (
-              <div key={i} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                {i % 2 === 0 ? (
-                  <>
-                    <div>
-                      <div className="inline-block px-4 py-2 bg-accent/10 rounded-full border border-accent/20 mb-4">
-                        <span className="text-sm font-display font-bold text-accent">Step {item.step}</span>
-                      </div>
-                      <h3 className="text-3xl font-display font-bold mb-4">{item.title}</h3>
-                      <p className="text-lg text-foreground/70">{item.desc}</p>
-                    </div>
-                    <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl p-12 flex items-center justify-center">
-                      <item.icon className="w-24 h-24 text-accent/30" />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl p-12 flex items-center justify-center">
-                      <item.icon className="w-24 h-24 text-accent/30" />
-                    </div>
-                    <div>
-                      <div className="inline-block px-4 py-2 bg-accent/10 rounded-full border border-accent/20 mb-4">
-                        <span className="text-sm font-display font-bold text-accent">Step {item.step}</span>
-                      </div>
-                      <h3 className="text-3xl font-display font-bold mb-4">{item.title}</h3>
-                      <p className="text-lg text-foreground/70">{item.desc}</p>
-                    </div>
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-white">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4">Simple, Transparent Pricing</h2>
-            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-              Start free. Scale as you grow. No hidden fees.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Starter",
-                price: "Free",
-                desc: "Perfect for testing",
-                features: ["1 Social Account", "100 Posts/Month", "Basic Analytics", "Email Support"]
-              },
-              {
-                name: "Professional",
-                price: "$99",
-                period: "/month",
-                desc: "Most popular",
-                features: ["5 Social Accounts", "Unlimited Posts", "Advanced Analytics", "Competitor Analysis", "Priority Support"],
-                highlighted: true
-              },
-              {
-                name: "Enterprise",
-                price: "Custom",
-                desc: "For agencies",
-                features: ["Unlimited Accounts", "Custom Workflows", "API Access", "Dedicated Support", "White Label Option"]
-              }
-            ].map((plan, i) => (
-              <Card 
-                key={i} 
-                className={`p-8 flex flex-col transition-all duration-300 ${
-                  plan.highlighted 
-                    ? "border-accent shadow-2xl scale-105 bg-gradient-to-br from-accent/5 to-primary/5" 
-                    : "border-border"
-                }`}
-              >
-                <h3 className="text-2xl font-display font-bold mb-2">{plan.name}</h3>
-                <p className="text-foreground/60 mb-6">{plan.desc}</p>
-                <div className="mb-6">
-                  <span className="text-4xl font-display font-bold">{plan.price}</span>
-                  {plan.period && <span className="text-foreground/60">{plan.period}</span>}
-                </div>
-                <ul className="space-y-3 mb-8 flex-grow">
-                  {plan.features.map((feature, j) => (
-                    <li key={j} className="flex items-center gap-2 text-foreground/70">
-                      <div className="w-4 h-4 rounded-full bg-accent/20 flex items-center justify-center">
-                        <span className="text-xs text-accent">✓</span>
-                      </div>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Button 
-                  className={plan.highlighted ? "bg-accent hover:bg-accent/90 text-white" : ""}
-                  variant={plan.highlighted ? "default" : "outline"}
-                  size="lg"
-                >
-                  Get Started
-                </Button>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section with Email Signup */}
-      <section className="py-20 bg-gradient-to-r from-primary via-primary/90 to-accent text-white">
-        <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl lg:text-5xl font-display font-bold mb-6">Ready to Scale Your Affiliate Business?</h2>
-              <p className="text-xl text-white/80 mb-8">
-                Join hundreds of affiliate marketers who are earning $5K-$50K+ per month with Nexa's automation platform.
-              </p>
-            </div>
-
-            {/* Email Signup Form */}
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 mb-8">
-              <div className="flex items-center gap-3 mb-6">
-                <Mail className="w-6 h-6 text-accent" />
-                <h3 className="text-2xl font-display font-bold">Get Your Free Automation Blueprint</h3>
-              </div>
-              <p className="text-white/80 mb-6">Discover exactly how to automate your affiliate marketing. Plus, get exclusive tips and strategies delivered to your inbox.</p>
-              
-              {subscribed ? (
-                <div className="flex items-center justify-center gap-3 p-4 bg-accent/20 rounded-lg border border-accent">
-                  <CheckCircle className="w-6 h-6 text-accent" />
-                  <div>
-                    <p className="font-display font-bold text-white">Success!</p>
-                    <p className="text-sm text-white/80">Check your email for your free blueprint and exclusive resources.</p>
-                  </div>
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="email"
-                    inputMode="email"
-                    maxLength={254}
-                    className="manus-no-record flex-1 bg-white/90 text-foreground placeholder:text-foreground/50 border-0 h-12 rounded-lg"
-                    required
-                  />
-                  <Button
-                    type="submit"
-                    disabled={loading}
-                    className="bg-accent hover:bg-accent/90 text-primary font-bold h-12 px-8 whitespace-nowrap"
-                  >
-                    {loading ? "Subscribing..." : "Get Blueprint"}
-                  </Button>
-                </form>
-              )}
-              <p className="text-xs text-white/60 mt-4">✓ No spam. Unsubscribe anytime. We respect your privacy.</p>
-            </div>
-
-            {/* Alternative CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                Start Your Free Trial <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                Schedule a Demo
-              </Button>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-border py-12">
-        <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <section id="contact" className="bg-[#0A0A0A] text-white">
+          <div className="container grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <img 
-                  src="/manus-storage/logo-icon-dark_7819b04d.png" 
-                  alt="Nexa Logo" 
-                  className="w-6 h-6"
-                />
-                <span className="font-display font-bold text-primary">Nexa</span>
+              <div className="mb-6 flex items-center gap-3 text-[11px] font-extrabold uppercase tracking-[0.18em] text-[#F14B51]">
+                <Sparkles className="h-4 w-4" /> {content.signal.label}
               </div>
-              <p className="text-sm text-foreground/60">Automate your affiliate marketing and scale to $10K+/month.</p>
+              <h2 className="max-w-3xl text-[clamp(2.4rem,5vw,5rem)] font-extrabold leading-[0.95] tracking-[-0.07em]">{content.signal.title}</h2>
             </div>
-            <div>
-              <h4 className="font-display font-bold mb-4">Product</h4>
-              <ul className="space-y-2 text-sm text-foreground/60">
-                <li><a href="#" className="hover:text-primary transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Documentation</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-display font-bold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm text-foreground/60">
-                <li><a href="#" className="hover:text-primary transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-display font-bold mb-4">Legal</h4>
-              <ul className="space-y-2 text-sm text-foreground/60">
-                <li><a href="#" className="hover:text-primary transition-colors">Privacy</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Terms</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Cookies</a></li>
-              </ul>
+            <div className="border-s border-white/20 ps-0 lg:ps-10">
+              <p className="max-w-md text-[17px] font-medium leading-8 text-white/70">{content.signal.body}</p>
+              <a href="#top" className="mt-8 inline-flex h-12 items-center gap-3 bg-[#C9141B] px-5 text-sm font-extrabold text-white transition-colors hover:bg-white hover:text-[#0A0A0A]">
+                {content.signal.button}<ArrowUpRight className="h-4 w-4" />
+              </a>
             </div>
           </div>
-          <div className="border-t border-border pt-8">
-            <p className="text-center text-sm text-foreground/60">
-              © 2026 Nexa Marketing Global. All rights reserved.
-            </p>
+        </section>
+      </main>
+
+      <footer className="bg-[#F7F5F2]">
+        <div className="container grid gap-10 py-12 sm:grid-cols-[1.3fr_repeat(3,0.7fr)]">
+          <div>
+            <div className="flex items-center gap-3">
+              <img src={logoUrl} alt="Nexa Marketing Global" className="h-10 w-10 rounded-full border border-[#0A0A0A]/15 object-contain" />
+              <span className="text-sm font-extrabold tracking-[-0.04em]">NEXA MARKETING GLOBAL</span>
+            </div>
+            <p className="mt-5 max-w-xs text-sm font-semibold leading-6 text-[#5D5D62]">{content.footer.tagline}</p>
           </div>
+          <div><p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#C9141B]">{content.footer.product}</p><p className="mt-4 text-sm font-bold">{content.nav.platform}</p><p className="mt-3 text-sm font-bold">{content.nav.workflow}</p></div>
+          <div><p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#C9141B]">{content.footer.company}</p><p className="mt-4 text-sm font-bold">{content.nav.insights}</p><p className="mt-3 text-sm font-bold">{content.nav.contact}</p></div>
+          <div><p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#C9141B]">{content.footer.legal}</p><p className="mt-4 text-sm font-bold">{content.footer.privacy}</p><p className="mt-3 text-sm font-bold">{content.footer.terms}</p><p className="mt-3 text-sm font-bold">{content.footer.cookies}</p></div>
         </div>
+        <div className="border-t border-[#DDD9D2]"><div className="container flex flex-col gap-2 py-5 text-[11px] font-bold uppercase tracking-[0.1em] text-[#5D5D62] sm:flex-row sm:items-center sm:justify-between"><span>© 2026 Nexa Marketing Global.</span><span>{content.footer.rights}</span></div></div>
       </footer>
     </div>
   );

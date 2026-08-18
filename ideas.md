@@ -1,152 +1,75 @@
-# Nexa Marketing Global - Design Philosophy
+# Nexa Marketing Global — Global Brand System
 
-## Design Approach: Modern Tech-Forward Minimalism with Strategic Depth
+## الاتجاه المختار: Global Editorial Enterprise
 
-### Core Design Philosophy
+تتبنى Nexa لغة بصرية تشبه المنصات العالمية الناضجة: واجهة هادئة ذات تباين عالٍ، مساحات بيضاء محسوبة، شبكة تحريرية مرنة، ورسائل تجارية دقيقة بدلاً من المؤثرات التقنية الزائدة. الشعار المرفق هو المرجع البصري للعلامة؛ لذلك يبقى الأسود أساس الثقة، بينما يعمل الأحمر القاني كتوقيع بصري محدود ودقيق.
 
-**Chosen Aesthetic:** Modern Tech-Forward Minimalism with Strategic Depth
+### الحركة التصميمية
 
-This design philosophy combines the clarity and sophistication of minimalism with the energy and innovation of tech-forward aesthetics. The approach emphasizes clean lines, purposeful whitespace, and strategic use of depth to create a premium, trustworthy platform that appeals to American tech-savvy audiences.
+**Editorial technology design** مع منطق منتجات B2B العالمية: نبرة تحريرية راقية، وحدات محتوى واضحة، ومؤشرات أداء قابلة للمسح السريع. لا يعتمد التصميم على بطاقات متكررة أو تدرجات صارخة؛ بل على إيقاع بصري منظم وخطوط تقسيم رفيعة وتكوينات غير متماثلة.
 
-### Design Movement
-**Intersection of:** Contemporary SaaS Design + Tech Product Marketing + High-Ticket Affiliate Sophistication
+### المبادئ الأساسية
 
-The design draws from modern SaaS platforms (Stripe, Figma, Vercel) while maintaining the persuasive clarity needed for affiliate marketing. It positions Nexa as a premium, data-driven platform rather than a generic marketing site.
+1. **الثقة قبل الزخرفة:** كل قسم يقدّم معلومة أو دليلاً أو إجراءً مفهوماً، مع تقليل العناصر الثانوية.
+2. **هوية قابلة للتوسع عالمياً:** الشعار، اللون القاني، وخطوط الواجهة تعمل بوضوح في اللغات اللاتينية والعربية وCJK.
+3. **الوضوح التحريري:** العناوين قوية وموجزة، والبيانات والملصقات الثانوية دقيقة ومقروءة.
+4. **تجربة محلية داخل إطار عالمي:** مبدل اللغة مرئي، وRTL للعربية أصيل وليس مجرد قلب بصري.
 
-### Core Principles
+### فلسفة اللون
 
-1. **Clarity Through Reduction:** Every element serves a purpose. No decorative clutter. Information hierarchy guides the eye naturally.
-2. **Strategic Depth:** Subtle shadows, layering, and micro-interactions create dimension without visual noise. Depth conveys sophistication.
-3. **Data-Driven Storytelling:** Visual hierarchy emphasizes metrics, workflows, and results. Numbers and diagrams communicate value instantly.
-4. **Premium Accessibility:** Modern, readable typography paired with generous whitespace ensures both beauty and usability.
+| الدور | اللون | الهدف |
+| --- | --- | --- |
+| Ink | `#0A0A0A` | العمق، الثقة، والعناوين عالية التباين |
+| Signal Crimson | `#C9141B` | لون Nexa المميّز للأفعال المهمة والمؤشرات |
+| Warm Paper | `#F7F5F2` | خلفية دافئة تمنح طابعاً تحريرياً عالمياً |
+| Slate | `#5D5D62` | النصوص الثانوية والبيانات الوصفية |
+| Rule | `#DDD9D2` | خطوط تقسيم هادئة وتنظيم المحتوى |
 
-### Color Philosophy
+الأحمر القاني لا يستخدم كخلفية عامة؛ بل كعلامة توجيه ومسار للقرار، بما يحافظ على قيمته البصرية ويمنع إرهاق العين.
 
-**Primary Palette:**
-- **Primary Brand Color:** Deep Indigo (`#1F2937` / `oklch(0.25 0.08 280)`) - conveys trust, technology, and professionalism
-- **Accent Color:** Vibrant Cyan (`#06B6D4` / `oklch(0.65 0.15 200)`) - energy, innovation, and forward momentum
-- **Background:** Off-White (`#FAFAFA` / `oklch(0.98 0.001 0)`) - clean, modern, reduces eye strain
-- **Text:** Charcoal (`#1A1A1A` / `oklch(0.1 0.01 0)`) - high contrast, readable, professional
+### التخطيط البنيوي
 
-**Emotional Intent:** The combination of deep indigo + vibrant cyan creates a sense of trustworthy innovation. The palette feels modern, tech-forward, and premium without being cold or corporate.
+الصفحة تعتمد شريط تنقل أبيض ثابتاً، ثم منطقة Hero بتركيب من عمود تحرير رئيسي ولوحة تشغيل فعلية، يليها شريط ثقة وأقسام قابلة للمسح. تعتمد الأقسام على حدود أفقية واضحة ومساحات كبيرة لا على صفوف من البطاقات. في اللغة العربية ينتقل عمود النص إلى اليمين مع الحفاظ على تسلسل العناصر وتوازن الصورة.
 
-### Layout Paradigm
+### عناصر التوقيع
 
-**Asymmetric, Section-Based Flow:**
-- Hero section with diagonal/asymmetric composition (not centered)
-- Alternating left-right content blocks for visual rhythm
-- Strategic use of full-width sections to break monotony
-- Generous vertical spacing (breathing room) between sections
-- Grid-based but with intentional breaks and overlaps
+1. **ختم العلامة:** الشعار المرفق ضمن حاوية دائرية أو مربعة بحد رفيع، يستخدم في الرأس والفوتر ومؤشرات العلامة.
+2. **شريط الإشارة القاني:** خط قصير أو رقم خطوة أحمر قانٍ يوجّه النظر إلى القرار أو النتيجة الأساسية.
+3. **الخطوط التحريرية:** حدود 1px هادئة تفصل الوحدات بدل الظلال الثقيلة أو الحدود الملونة.
 
-**Not:** Centered, symmetrical, or grid-locked layouts
+### التفاعل والحركة
 
-### Signature Elements
+التفاعل عملي وصامت: انتقالات لون وشفافية تحت 180ms، زر ينكمش قليلاً عند الضغط، ومبدل لغة فوري. لا تستخدم رسوم دخول متكررة، وتُحترم تفضيلات تقليل الحركة. تظل القوائم والأزرار قابلة للوصول بلوحة المفاتيح.
 
-1. **Gradient Accents:** Subtle linear gradients (indigo → cyan) used sparingly on CTAs, section dividers, and key metrics
-2. **Data Visualization Cards:** Clean, minimal cards displaying workflows, metrics, and product comparisons with icon + number + label
-3. **Diagonal Section Dividers:** SVG wave/diagonal dividers between sections in the brand colors (not generic)
-4. **Micro-interactions:** Smooth hover effects on cards (lift + shadow), button press feedback (scale), and entrance animations
+### نظام الخطوط
 
-### Interaction Philosophy
+| الاستخدام | الخط |
+| --- | --- |
+| اللغات اللاتينية | Manrope للعناوين والنصوص |
+| العربية | Noto Sans Arabic |
+| اليابانية | Noto Sans JP |
+| الصينية | Noto Sans SC |
 
-- **Responsive Feedback:** Buttons scale on press (0.97), cards lift on hover with shadow depth
-- **Entrance Animations:** Staggered fade-in for lists, slide-up for sections (all under 300ms)
-- **Hover States:** Subtle color shifts and shadow changes, never jarring
-- **Smooth Transitions:** All interactive elements use `ease-out` timing for snappy feel
+تعتمد العناوين وزناً 700–800، والنصوص وزناً 400–500. لا تُستخدم Inter كخط افتراضي للواجهة.
 
-### Animation Guidelines
+### اللغات المدعومة
 
-- **Button Press:** 100-120ms scale(0.97) with ease-out
-- **Card Hover:** 150ms lift (translateY -4px) + shadow increase
-- **Section Entrance:** 200-300ms fade-in + slide-up, staggered by 50ms per item
-- **Micro-interactions:** 80-150ms for small UI feedback (icon changes, color shifts)
-- **Respect prefers-reduced-motion:** All animations gated behind media query
+الإنجليزية، العربية، الإسبانية، الفرنسية، الألمانية، البرتغالية، اليابانية، والصينية المبسطة. الإنجليزية هي اللغة الافتراضية، وتُحفَظ لغة الزائر محلياً. العربية تستخدم `dir="rtl"` و`lang="ar"` تلقائياً.
 
-### Typography System
+### جوهر العلامة
 
-**Font Pairing:**
-- **Display/Headlines:** Geist (or similar modern sans-serif) - bold, geometric, tech-forward
-  - H1: 48px, weight 700, line-height 1.2
-  - H2: 36px, weight 600, line-height 1.3
-  - H3: 28px, weight 600, line-height 1.4
-- **Body/UI:** Inter - clean, readable, professional
-  - Body: 16px, weight 400, line-height 1.6
-  - Small: 14px, weight 400, line-height 1.5
-  - UI Labels: 12px, weight 500, line-height 1.4
+**Nexa Marketing Global هو نظام تشغيل تسويق بالعمولة لمسوّقي الأداء الذين يريدون تنسيق المحتوى والتحليل والنمو عبر أسواق متعددة.**
 
-**Hierarchy Rules:**
-- Headlines use Geist (display font) for visual distinction
-- Body uses Inter for readability
-- Accent text (CTAs, labels) uses weight 600+ in primary color
-- Avoid mixing fonts within a single sentence
+**الشخصية:** موثوقة، حاسمة، عالمية.
 
-### Brand Essence
+### صوت العلامة
 
-**One-Line Positioning:**
-Nexa Marketing Global is the intelligent automation platform for tech-savvy affiliate marketers who want to scale earnings without scaling effort.
+العناوين مختصرة وثابتة، وتحترم وقت المستخدم. لا وعود مبالغ فيها ولا لغة تسويقية عامة.
 
-**Three Personality Adjectives:**
-1. **Sophisticated** - Premium, data-driven, professional
-2. **Innovative** - Forward-thinking, tech-enabled, cutting-edge
-3. **Practical** - Results-focused, actionable, no fluff
+> “Build a repeatable affiliate engine.”
 
-### Brand Voice
+> “Control the workflow. Measure the outcome.”
 
-**Tone:** Direct, confident, data-driven, approachable (not corporate-speak)
+### قرار التنفيذ
 
-**Headline Examples:**
-- "Automate Your Way to $10K/Month in Affiliate Revenue" (not "Welcome to Our Platform")
-- "Stop Posting Randomly. Start Posting Strategically." (not "Get Started Today")
-
-**CTA Examples:**
-- "See Your Automation Blueprint" (not "Get Started")
-- "Explore the Workflow" (not "Learn More")
-
-**Microcopy Philosophy:**
-- Speak to the user's pain point first, then the solution
-- Use numbers and specifics (not "increase earnings" → "earn 3-5x more per post")
-- Action-oriented language (verbs, not nouns)
-
-### Wordmark & Logo
-
-**Logo Concept:** "Nexa" with a stylized circuit/node icon
-- Geometric, tech-forward mark (no text, just symbol)
-- Primary color (deep indigo) with cyan accent
-- Scalable from favicon (16px) to header (64px)
-- Bold, memorable, distinctly tech
-
-**Logo Placement:**
-- Header: 48px, left-aligned
-- Favicon: 32px version
-- Used consistently across all touchpoints
-
-### Signature Brand Color
-
-**Deep Indigo (#1F2937)** - Unmistakably Nexa's color
-- Used in logo, primary buttons, section headers
-- Paired with cyan for energy and innovation
-- Instantly recognizable across the platform
-
----
-
-## Implementation Checklist
-
-- [ ] Typography: Geist for headlines, Inter for body
-- [ ] Color palette: Indigo primary, cyan accent, off-white background
-- [ ] Layout: Asymmetric sections with generous whitespace
-- [ ] Animations: Smooth, under 300ms, respect prefers-reduced-motion
-- [ ] Components: Data cards, gradient accents, diagonal dividers
-- [ ] Branding: Logo, voice, personality consistent throughout
-- [ ] Accessibility: High contrast, readable fonts, keyboard navigation
-- [ ] Responsiveness: Mobile-first, tested at 375px, 768px, 1280px
-
----
-
-## Visual Assets Generated
-
-- [ ] Hero background image (tech-inspired, abstract)
-- [ ] Logo/icon (Nexa circuit mark)
-- [ ] Workflow diagram (automation process visualization)
-- [ ] Product comparison graphics
-- [ ] Section dividers (diagonal/wave SVGs)
+سيستخدم الموقع الشعار المرفق كأصل العلامة الأساسي، ويعيد بناء الرأس، البطل، قسم المنهج، مقياس الثقة، CTA، والفوتر حول هذه الهوية. كل ملف واجهة يُعدّل سيحتوي على تعليق موجز يذكّر باتجاه **Global Editorial Enterprise**.

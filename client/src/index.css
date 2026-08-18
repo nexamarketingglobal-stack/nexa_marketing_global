@@ -1,6 +1,7 @@
+/* Global Editorial Enterprise: Manrope plus locale-aware Arabic and CJK fonts. */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -124,6 +125,9 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: Manrope, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -136,6 +140,14 @@
   input[type="radio"]:not(:disabled) {
     @apply cursor-pointer;
   }
+}
+
+html[dir="rtl"] body {
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] select {
+  text-align: start;
 }
 
 @layer components {
