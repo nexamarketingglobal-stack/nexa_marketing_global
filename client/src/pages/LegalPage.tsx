@@ -101,7 +101,10 @@ export default function LegalPage({ page }: { page: LegalPageKey }) {
                 </section>
               ))}
             </div>
-            <div className="mt-12 border-s-2 border-[#0A0A0A] ps-5 text-sm font-bold leading-7 text-[#333]">{legalDocument.notice}</div>
+            <div className="mt-12 border-s-2 border-[#0A0A0A] ps-5 text-sm font-bold leading-7 text-[#333]">
+              <p>{legalDocument.notice}</p>
+              {page === "privacy" && <a href="mailto:info.nexa.marketing.global@gmail.com?subject=Privacy%20Request%20-%20Nexa%20Marketing%20Global" className="mt-3 inline-flex break-all text-[#C9141B] underline decoration-[#C9141B]/40 underline-offset-4 transition-colors hover:text-[#0A0A0A]">info.nexa.marketing.global@gmail.com</a>}
+            </div>
           </article>
         </section>
       </main>
